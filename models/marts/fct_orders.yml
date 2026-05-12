@@ -2,6 +2,9 @@ models:
   - name: fct_orders
     semantic_model:
       enabled: true
+    config:
+      contract:
+        enforced: true
     agg_time_dimension: ordered_at
     description: |
       Order fact table. This table is at the order grain with one row per order.
@@ -11,29 +14,40 @@ models:
         entity:
           type: primary
           name: order_id
+        data_type: varchar
       - name: location_id
         entity:
           type: foreign
           name: location_id
+        data_type: varchar
       - name: customer_id
         entity:
           type: foreign
           name: customer_id
+        data_type: varchar
 
       ## dimensions
       - name: ordered_at
         dimension:
           type: time
         granularity: day
+        data_type: timestamp
       - name: order_total ## this is a dimension because we intend to filter by it later
         dimension:
           type: categorical
+        data_type: decimal
       - name: is_food_order
         dimension:
           type: categorical
+        data_type: boolean
       - name: is_drink_order
         dimension:
           type: categorical
+        data_type: boolean
+      - name: tax_paid
+        data_type: decimal
+      - name: order_cost
+        data_type: decimal
 
     metrics: ## simple metrics
       - name: order_total

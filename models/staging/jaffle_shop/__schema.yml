@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: jaffle_shop
-    database: raw
-    schema: new_jaffle_shop
+    database: mesh_raw
+    schema: jaffle_shop
     tables:
       - name: customers
       - name: orders
