@@ -1,7 +1,8 @@
-{% macro find_datatypes() %}
-    {% set cols=adapter.get_columns_in_relation(fct_orders) %}
+{% macro find_datatypes(model) %}
+    {% set cols=adapter.get_columns_in_relation(model) %}
+    {% set columns_string = [] %}
     {%- for col in cols %}
-      - name: {{ col.name | lower }}
-        data_type: {{ col.dtype | lower }}
+        {% do columns_string.append([col.name, col.dtype]) %}
     {%- endfor %}
+    {{ return(columns_string) }}
 {% endmacro %}
