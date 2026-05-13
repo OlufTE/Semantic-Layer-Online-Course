@@ -23,8 +23,8 @@ renamed as (
         customer as customer_id,
 
         ---------- properties
-        (order_total / 100.0) as order_total,
-        (tax_paid / 100.0) as tax_paid,
+        {{ cents_to_dollars("order_total") }} as order_total,
+        {{ cents_to_dollars("tax_paid") }} as tax_paid,
 
         ---------- timestamps
         ordered_at
